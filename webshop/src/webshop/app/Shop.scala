@@ -1,18 +1,20 @@
 package webshop.framework
 
+import collection.mutable._
+
 class Shop {
-  var products: List[Product] =List()
-  var users: List[Customer] =List()
-  var orders: List[Order] =List()
+  val products: ListBuffer[Product] =ListBuffer()
+  val users: ListBuffer[Customer] =ListBuffer()
+  val orders: ListBuffer[Order] =ListBuffer()
   def addProduct(product: Product) ={
-      this.products =product :: this.products
+      this.products +=product
   }
   def addOrder(order: Order) ={
-    this.orders =order :: this.orders
+    this.orders +=order
   }
   def addUser(user: Customer) ={
-    this.users =user :: this.users
+    this.users +=user
   }
-  def findProduct(nam: String) : List[Product] =this.products.filter(_.name.contains(nam))
-  def getProducts: List[Product] =this.products
+  def findProduct(nam: String) : ListBuffer[Product] =this.products.filter(_.name.contains(nam))
+  def getProducts: ListBuffer[Product] =this.products
 }

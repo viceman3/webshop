@@ -17,12 +17,28 @@ private def toInt(s: String): Option[Int] = {
     req match {
       case Request("POST", "products/create", paramsMap) => {
         try {
-        val name: String =paramsMap.get("name").getOrElse("invalid name")
-        val category: String =paramsMap.get("category").getOrElse("invalid category")
-        val productId: Int =toInt(paramsMap.get("productId").getOrElse("-1")).getOrElse(0)
-        val quantity: Int =toInt(paramsMap.get("quantity").getOrElse("-1")).getOrElse(0)
-        val price: Int =toInt(paramsMap.get("price").getOrElse("-1")).getOrElse(0)
-          val product =Product(name, category, productId, quantity, price)
+        val name =paramsMap.get("name")
+        if (name.isEmpty) {
+          throw(new IllegalArgumentException("name not found"))
+        }
+
+        val category =paramsMap.get("category")
+        if (category.isEmpty) {
+          throw(new IllegalArgumentException("category not found"))
+        }
+        val productId =paramsMap.get("productId")
+            if (productId.isEmpty) {
+              throw(new IllegalArgumentException("productId not found"))
+            }
+        val quantity =paramsMap.get("quantity")
+            if (quantity.isEmpty) {
+              throw(new IllegalArgumentException("quantity not found"))
+            }
+        val price =paramsMap.get("price")
+        if (price.isEmpty) {
+          throw(new IllegalArgumentException("price not found"))
+        }
+          val product =Product(name.get, category.get, toInt(productId.get).getOrElse(0), toInt(quantity.get).getOrElse(0), toInt(price.get).getOrElse(0))
           shop.addProduct(product)
           Response(200, s"${product}, has been added.")
         }

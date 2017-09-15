@@ -28,6 +28,11 @@ class Simulator(server: Server) {
     val resp5: Response =server.acceptRequest(req5)
     println(s"response: ${resp5}")
 
+       val req6: Request =Request("POST", "products/create", Map("name" -> "Dell Lattitude 3131", "category" -> "laptop", "productId" -> "2", "price" -> "280000"))
+      println(s"request: ${req6}")
+    val resp6: Response =server.acceptRequest(req6)
+    println(s"response: ${resp6}")
+   
     }
 
 }
